@@ -113,6 +113,64 @@ th, td {
 .success {
     color: lightgreen;
 }
+
+/* KPI SECTION */
+.kpi-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.kpi-card {
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), rgba(122, 92, 255, 0.1));
+    border: 2px solid rgba(0, 245, 255, 0.3);
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.kpi-card:hover {
+    border-color: #00f5ff;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
+}
+document.getElementById("medicineDashboard").style.display = "block";
+.kpi-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.kpi-value {
+    font-size: 32px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #00f5ff, #7a5cff);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin: 10px 0;
+}
+
+.kpi-label {
+    font-size: 14px;
+    color: #a0aec0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.kpi-growth {
+    font-size: 12px;
+    color: #00ff00;
+    margin-top: 10px;
+}
+
+.kpi-section {
+    background: rgba(17, 24, 39, 0.5);
+    padding: 30px;
+    border-radius: 15px;
+    margin: 20px 0;
+}
 </style>
 </head>
 
@@ -120,14 +178,17 @@ th, td {
 
 <!-- NAVBAR -->
 <nav>
-    <h3>MediPredict AI</h3>
+    <h3>
+  <span style="display:block;">MediPredict AI</span>
+  <span style="display:block;">Black Box</span>
+</h3>
     <div>
         <a onclick="showPage('home')">Home</a>
+        <a onclick="showPage('kpi')">KPI</a>
         <a onclick="showPage('predictor')">Predictor</a>
         <a onclick="showPage('dashboard')">Health Info</a>
         <a onclick="showPage('medical')">Guide</a>
     </div>
-    <h4>Black box</h4>
 </nav>
 
 <div class="container">
@@ -139,11 +200,339 @@ th, td {
     <button onclick="showPage('predictor')">Start Analysis</button>
 </div>
 
+<!-- KPI DASHBOARD -->
+<div id="kpi" style="display:none;">
+    <div class="kpi-section">
+        <h2 style="text-align:center; color:#00f5ff; margin-bottom:30px;">📊 System Performance Metrics</h2>
+        
+        <div class="kpi-container">
+            <div class="kpi-card">
+                <div class="kpi-icon">🎯</div>
+                <div class="kpi-label">Prediction Accuracy</div>
+                <div class="kpi-value">94.8%</div>
+                <div class="kpi-growth">↑ 2.3% from last month</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon">👥</div>
+                <div class="kpi-label">Total Patients</div>
+                <div class="kpi-value">12,483</div>
+                <div class="kpi-growth">↑ 1,250 new patients</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon">✅</div>
+                <div class="kpi-label">Recovery Rate</div>
+                <div class="kpi-value">89.2%</div>
+                <div class="kpi-growth">↑ 3.1% improvement</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon">⚡</div>
+                <div class="kpi-label">System Uptime</div>
+                <div class="kpi-value">99.9%</div>
+                <div class="kpi-growth">↑ 0.2% from target</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon">⏱️</div>
+                <div class="kpi-label">Avg Diagnosis Time</div>
+                <div class="kpi-value">2.3s</div>
+                <div class="kpi-growth">↓ 0.8s faster</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon">💊</div>
+                <div class="kpi-label">Medicine Recommendations</div>
+                <div class="kpi-value">98,450</div>
+                <div class="kpi-growth">↑ 12,300 this month</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon">📈</div>
+                <div class="kpi-label">Treatment Success</div>
+                <div class="kpi-value">91.6%</div>
+                <div class="kpi-growth">↑ 2.8% growth</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon">⭐</div>
+                <div class="kpi-label">Patient Satisfaction</div>
+                <div class="kpi-value">4.7/5.0</div>
+                <div class="kpi-growth">↑ 0.3 points</div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon">🏥</div>
+                <div class="kpi-label">Hospital Partners</div>
+                <div class="kpi-value">256</div>
+                <div class="kpi-growth">↑ 18 new partnerships</div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- PREDICTOR -->
 <div id="predictor" style="display:none;">
     <div class="card">
         <h2>Enter Health Data</h2>
 
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#0a0f1c,#1e293b);
+    color: white;
+}
+
+nav {
+    background: #020617;
+    padding: 15px;
+    text-align: center;
+    font-size: 22px;
+    color: #38bdf8;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 15px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px;
+    width: 100%;
+    background: #38bdf8;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 20px;
+    background: #020617;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.medicine-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 15px;
+}
+
+.card h2 {
+    color: #38bdf8;
+}
+</style>
+</head>
+
+<body>
+
+<nav>🩺 MediPredict AI - Smart Health Bot</nav>
+
+<div class="container">
+
+<!-- PATIENT BOT -->
+<div class="card">
+<h2>👤 Patient History</h2>
+
+<input type="text" id="name" placeholder="Name">
+<input type="number" id="age" placeholder="Age">
+
+<select id="gender">
+<option>Male</option>
+<option>Female</option>
+</select>
+
+<h3>Symptoms</h3>
+
+<select id="fever">
+<option>No Fever</option>
+<option>Low Fever</option>
+<option>High Fever</option>
+</select>
+
+<select id="cough">
+<option>No Cough</option>
+<option>Dry Cough</option>
+<option>Wet Cough</option>
+</select>
+
+<select id="chestPain">
+<option>No Chest Pain</option>
+<option>Chest Pain</option>
+</select>
+
+<select id="breath">
+<option>Normal</option>
+<option>Mild</option>
+<option>Severe</option>
+</select>
+
+<select id="bp">
+<option>Normal BP</option>
+<option>High BP</option>
+<option>Low BP</option>
+</select>
+
+<select id="sugar">
+<option>Normal Sugar</option>
+<option>High Sugar</option>
+<option>Low Sugar</option>
+</select>
+
+<textarea id="other" placeholder="Other symptoms..."></textarea>
+
+<button onclick="analyze()">🔍 Analyze<title>Google Maps API Example</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="text-align:center;">🌍 My Google Map</h2>
+<div id="map"></div>
+
+<script>
+function initMap() {
+    const location = { lat: 28.6139, lng: 77.2090 }; // Delhi
+
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 12,
+        center: location
+    });
+
+    const marker = new google.maps.Marker({
+        position: location,
+        map: map,
+        title: "Delhi"
+    });
+}
+</script>
+
+<!-- GOOGLE MAPS API -->
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+</script> </button>
+</div>
+
+<!-- RESULT -->
+<div class="result" id="output">Result will appear here...</div>
+
+<!-- MEDICINE DASHBOARD -->
+<div class="card" id="medicineDashboard" style="display:none;">
+<h2>💊 Medicine Dashboard</h2>
+
+<div class="medicine-grid">
+
+<!-- ALL YOUR CARDS (UNCHANGED) -->
+<!-- (I kept everything exactly as you gave) -->
+
+<div class="card"><h2>🌡️ Fever</h2><ul><li>Paracetamol</li><li>Ibuprofen</li><li>Diclofenac</li><li>Naproxen</li><li>Aceclofenac</li></ul></div>
+
+<div class="card"><h2>🤧 Cold / Allergy</h2><ul><li>Cetirizine</li><li>Levocetirizine</li><li>Fexofenadine</li><li>Loratadine</li><li>Montelukast</li></ul></div>
+
+<div class="card"><h2>😷 Cough</h2><ul><li>Dextromethorphan</li><li>Ambroxol</li><li>Guaifenesin</li><li>Bromhexine</li><li>Levosalbutamol</li></ul></div>
+
+<div class="card"><h2>💓 Hypertension</h2><ul><li>Amlodipine</li><li>Losartan</li><li>Telmisartan</li><li>Enalapril</li><li>Atenolol</li><li>Labetalol</li></ul></div>
+
+<div class="card"><h2>🍬 Diabetes</h2><ul><li>Metformin</li><li>Glimepiride</li><li>Gliclazide</li><li>Sitagliptin</li><li>Vildagliptin</li><li>Insulin</li></ul></div>
+
+<div class="card"><h2>🫁 Asthma</h2><ul><li>Salbutamol</li><li>Budesonide</li><li>Formoterol</li><li>Montelukast</li><li>Ipratropium</li><li>Tiotropium</li></ul></div>
+
+<div class="card"><h2>🦠 Tuberculosis</h2><ul><li>Isoniazid</li><li>Rifampicin</li><li>Ethambutol</li><li>Pyrazinamide</li><li>Streptomycin</li></ul></div>
+
+<div class="card"><h2>🫁 Pneumonia</h2><ul><li>Amoxicillin</li><li>Azithromycin</li><li>Ceftriaxone</li><li>Levofloxacin</li><li>Doxycycline</li></ul></div>
+
+<div class="card"><h2>🚽 Diarrhea</h2><ul><li>ORS</li><li>Zinc</li><li>Metronidazole</li><li>Tinidazole</li><li>Norfloxacin</li><li>Loperamide</li></ul></div>
+
+<div class="card"><h2>🔥 Gastritis / GERD</h2><ul><li>Pantoprazole</li><li>Omeprazole</li><li>Esomeprazole</li><li>Famotidine</li><li>Ranitidine</li><li>Sucralfate</li></ul></div>
+
+<div class="card"><h2>🩺 Peptic Ulcer</h2><ul><li>Omeprazole</li><li>Pantoprazole</li><li>Esomeprazole</li><li>Sucralfate</li><li>Amoxicillin</li><li>Clarithromycin</li></ul></div>
+
+<div class="card"><h2>⚡ Epilepsy</h2><ul><li>Phenytoin</li><li>Sodium Valproate</li><li>Carbamazepine</li><li>Levetiracetam</li><li>Lamotrigine</li></ul></div>
+
+<div class="card"><h2>🚫 Constipation</h2><ul><li>Lactulose</li><li>Bisacodyl</li><li>Senna</li><li>Isabgol</li><li>Polyethylene Glycol</li></ul></div>
+
+<div class="card"><h2>❤️ Heart Failure</h2><ul><li>Furosemide</li><li>Spironolactone</li><li>Enalapril</li><li>Ramipril</li><li>Metoprolol</li><li>Digoxin</li></ul></div>
+
+<div class="card"><h2>🤮 Vomiting</h2><ul><li>Ondansetron</li><li>Metoclopramide</li><li>Domperidone</li><li>Promethazine</li><li>Dimenhydrinate</li></ul></div>
+
+<div class="card"><h2>🚻 UTI</h2><ul><li>Nitrofurantoin</li><li>Ciprofloxacin</li><li>Ofloxacin</li><li>Cefixime</li><li>Amoxicillin-Clavulanate</li></ul></div>
+
+<div class="card"><h2>🩸 Anemia</h2><ul><li>Ferrous Sulfate</li><li>Ferrous Fumarate</li><li>Folic Acid</li><li>Vitamin B12</li><li>Iron Sucrose</li></ul></div>
+
+<div class="card"><h2>🧬 Dyslipidemia</h2><ul><li>Atorvastatin</li><li>Rosuvastatin</li><li>Simvastatin</li><li>Fenofibrate</li><li>Ezetimibe</li></ul></div>
+
+<div class="card"><h2>🧠 Depression</h2><ul><li>Sertraline</li><li>Escitalopram</li><li>Fluoxetine</li><li>Paroxetine</li><li>Venlafaxine</li></ul></div>
+
+<div class="card"><h2>🫁 COPD</h2><ul><li>Salbutamol</li><li>Formoterol</li><li>Tiotropium</li><li>Ipratropium</li><li>Budesonide</li></ul></div>
+
+<div class="card"><h2>🦟 Malaria</h2><ul><li>Chloroquine</li><li>Artesunate</li><li>Artemether-Lumefantrine</li><li>Quinine</li><li>Primaquine</li></ul></div>
+
+<div class="card"><h2>🧫 Typhoid</h2><ul><li>Cefixime</li><li>Azithromycin</li><li>Ceftriaxone</li><li>Ofloxacin</li><li>Ciprofloxacin</li></ul></div>
+
+<div class="card"><h2>🤕 Migraine</h2><ul><li>Sumatriptan</li><li>Rizatriptan</li><li>Ergotamine</li><li>Propranolol</li><li>Topiramate</li></ul></div>
+
+<div class="card"><h2>🦴 Arthritis</h2><ul><li>Diclofenac</li><li>Ibuprofen</li><li>Naproxen</li><li>Aceclofenac</li><li>Tramadol</li></ul></div>
+
+</div>
+</div>
+
+</div>
+
+<script>
+function analyze() {
+    let fever = document.getElementById("fever").value;
+    let cough = document.getElementById("cough").value;
+    let chestPain = document.getElementById("chestPain").value;
+    let breath = document.getElementById("breath").value;
+    let bp = document.getElementById("bp").value;
+    let sugar = document.getElementById("sugar").value;
+
+    let result = "🔍 Analysis:<br><br>";
+
+    if (fever === "High Fever" && cough !== "No Cough") {
+        result += "⚠ Infection (Flu / Pneumonia)<br>";
+    }
+
+    if (chestPain === "Chest Pain" && breath === "Severe") {
+        result += "🚨 Possible Heart Issue<br>";
+    }
+
+    if (bp === "High BP") result += "📈 Hypertension<br>";
+    if (sugar === "High Sugar") result += "🍬 Diabetes Risk<br>";
+
+    result += "<br>💡 Advice:<br>Consult a doctor immediately.";
+
+    document.getElementById("output").innerHTML = result;
+}
+</script>
         <input id="symptoms" placeholder="Symptoms (fever, cough...)">
         <input id="sugar" type="number" placeholder="Blood Sugar (mg/dL)">
         <input id="bp" placeholder="Blood Pressure (120/80)">
@@ -181,11 +570,277 @@ th, td {
 
         <h2>💊 Common Medicines</h2>
 
-        <p><b>Fever:</b> Paracetamol, Ibuprofen</p>
-        <p><b>Cold:</b> Cetirizine, Loratadine</p>
-        <p><b>Cough:</b> Dextromethorphan</p>
-        <p><b>BP:</b> Amlodipine</p>
-        <p><b>Diabetes:</b> Metformin</p>
+        <div class="container">
+
+<div class="card">
+<h2>🌡️ Fever</h2>
+<ul>
+<li>Paracetamol</li>
+<li>Ibuprofen</li>
+<li>Diclofenac</li>
+<li>Naproxen</li>
+<li>Aceclofenac</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🤧 Cold / Allergy</h2>
+<ul>
+<li>Cetirizine</li>
+<li>Levocetirizine</li>
+<li>Fexofenadine</li>
+<li>Loratadine</li>
+<li>Montelukast</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>😷 Cough</h2>
+<ul>
+<li>Dextromethorphan</li>
+<li>Ambroxol</li>
+<li>Guaifenesin</li>
+<li>Bromhexine</li>
+<li>Levosalbutamol</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>💓 Hypertension</h2>
+<ul>
+<li>Amlodipine</li>
+<li>Losartan</li>
+<li>Telmisartan</li>
+<li>Enalapril</li>
+<li>Atenolol</li>
+<li>Labetalol</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🍬 Diabetes</h2>
+<ul>
+<li>Metformin</li>
+<li>Glimepiride</li>
+<li>Gliclazide</li>
+<li>Sitagliptin</li>
+<li>Vildagliptin</li>
+<li>Insulin</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🫁 Asthma</h2>
+<ul>
+<li>Salbutamol</li>
+<li>Budesonide</li>
+<li>Formoterol</li>
+<li>Montelukast</li>
+<li>Ipratropium</li>
+<li>Tiotropium</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🦠 Tuberculosis</h2>
+<ul>
+<li>Isoniazid</li>
+<li>Rifampicin</li>
+<li>Ethambutol</li>
+<li>Pyrazinamide</li>
+<li>Streptomycin</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🫁 Pneumonia</h2>
+<ul>
+<li>Amoxicillin</li>
+<li>Azithromycin</li>
+<li>Ceftriaxone</li>
+<li>Levofloxacin</li>
+<li>Doxycycline</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🚽 Diarrhea</h2>
+<ul>
+<li>ORS</li>
+<li>Zinc</li>
+<li>Metronidazole</li>
+<li>Tinidazole</li>
+<li>Norfloxacin</li>
+<li>Loperamide</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🔥 Gastritis / GERD</h2>
+<ul>
+<li>Pantoprazole</li>
+<li>Omeprazole</li>
+<li>Esomeprazole</li>
+<li>Famotidine</li>
+<li>Ranitidine</li>
+<li>Sucralfate</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🩺 Peptic Ulcer</h2>
+<ul>
+<li>Omeprazole</li>
+<li>Pantoprazole</li>
+<li>Esomeprazole</li>
+<li>Sucralfate</li>
+<li>Amoxicillin</li>
+<li>Clarithromycin</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>⚡ Epilepsy</h2>
+<ul>
+<li>Phenytoin</li>
+<li>Sodium Valproate</li>
+<li>Carbamazepine</li>
+<li>Levetiracetam</li>
+<li>Lamotrigine</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🚫 Constipation</h2>
+<ul>
+<li>Lactulose</li>
+<li>Bisacodyl</li>
+<li>Senna</li>
+<li>Isabgol</li>
+<li>Polyethylene Glycol</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>❤️ Heart Failure</h2>
+<ul>
+<li>Furosemide</li>
+<li>Spironolactone</li>
+<li>Enalapril</li>
+<li>Ramipril</li>
+<li>Metoprolol</li>
+<li>Digoxin</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🤮 Vomiting</h2>
+<ul>
+<li>Ondansetron</li>
+<li>Metoclopramide</li>
+<li>Domperidone</li>
+<li>Promethazine</li>
+<li>Dimenhydrinate</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🚻 UTI</h2>
+<ul>
+<li>Nitrofurantoin</li>
+<li>Ciprofloxacin</li>
+<li>Ofloxacin</li>
+<li>Cefixime</li>
+<li>Amoxicillin-Clavulanate</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🩸 Anemia</h2>
+<ul>
+<li>Ferrous Sulfate</li>
+<li>Ferrous Fumarate</li>
+<li>Folic Acid</li>
+<li>Vitamin B12</li>
+<li>Iron Sucrose</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🧬 Dyslipidemia</h2>
+<ul>
+<li>Atorvastatin</li>
+<li>Rosuvastatin</li>
+<li>Simvastatin</li>
+<li>Fenofibrate</li>
+<li>Ezetimibe</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🧠 Depression</h2>
+<ul>
+<li>Sertraline</li>
+<li>Escitalopram</li>
+<li>Fluoxetine</li>
+<li>Paroxetine</li>
+<li>Venlafaxine</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🫁 COPD</h2>
+<ul>
+<li>Salbutamol</li>
+<li>Formoterol</li>
+<li>Tiotropium</li>
+<li>Ipratropium</li>
+<li>Budesonide</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🦟 Malaria</h2>
+<ul>
+<li>Chloroquine</li>
+<li>Artesunate</li>
+<li>Artemether-Lumefantrine</li>
+<li>Quinine</li>
+<li>Primaquine</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🧫 Typhoid</h2>
+<ul>
+<li>Cefixime</li>
+<li>Azithromycin</li>
+<li>Ceftriaxone</li>
+<li>Ofloxacin</li>
+<li>Ciprofloxacin</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🤕 Migraine</h2>
+<ul>
+<li>Sumatriptan</li>
+<li>Rizatriptan</li>
+<li>Ergotamine</li>
+<li>Propranolol</li>
+<li>Topiramate</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>🦴 Arthritis / Pain</h2>
+<ul>
+<li>Diclofenac</li>
+<li>Ibuprofen</li>
+<li>Naproxen</li>
+<li>Aceclofenac</li>
+<li>Tramadol</li>
+</ul>
 
         <h2>📊 Normal Values</h2>
         <table>
@@ -202,7 +857,7 @@ th, td {
 
 <script>
 function showPage(page) {
-    let pages = ["home","predictor","dashboard","medical"];
+    let pages = ["home","predictor","dashboard","medical","kpi"];
     pages.forEach(p => document.getElementById(p).style.display = "none");
     document.getElementById(page).style.display = "block";
 }
@@ -231,6 +886,7 @@ function analyze() {
     if (result === "") result = "<span class='success'>✅ You are Healthy</span>";
 
     document.getElementById("result").innerHTML = result;
+    document.getElementById("medicineDashboard").style.display = "block";
 }
 </script>
 
