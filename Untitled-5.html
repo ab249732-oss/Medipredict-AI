@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediPredict AI - Advanced</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#0a0f1c,#1e293b);
+    color: white;
+}
+
+/* NAVBAR */
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px;
+    background: rgba(17,24,39,0.8);
+    backdrop-filter: blur(10px);
+}
+
+nav a {
+    color: #00f5ff;
+    margin: 0 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+}
+nav a:hover { color: #7a5cff; }
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+.hero h1 {
+    font-size: 40px;
+    background: linear-gradient(45deg,#00f5ff,#7a5cff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+.hero p {
+    opacity: 0.8;
+}
+
+/* BUTTON */
+button {
+    padding: 15px 25px;
+    background: linear-gradient(45deg,#00f5ff,#7a5cff);
+    border: none;
+    border-radius: 30px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+button:hover {
+    transform: scale(1.05);
+}
+
+/* CARD */
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px 0;
+    backdrop-filter: blur(10px);
+}
+
+/* INPUT */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: none;
+}
+
+/* DASHBOARD */
+.dashboard {
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th {
+    background: #0d6efd;
+    color: white;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+/* RESULT */
+.result {
+    margin-top: 20px;
+    font-size: 18px;
+}
+.warning {
+    color: red;
+    font-weight: bold;
+}
+.success {
+    color: lightgreen;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <h3>MediPredict AI</h3>
+    <div>
+        <a onclick="showPage('home')">Home</a>
+        <a onclick="showPage('predictor')">Predictor</a>
+        <a onclick="showPage('dashboard')">Health Info</a>
+        <a onclick="showPage('medical')">Guide</a>
+    </div>
+    <h4>Black box</h4>
+</nav>
+
+<div class="container">
+
+<!-- HOME -->
+<div id="home" class="hero">
+    <h1>AI Health Predictor</h1>
+    <p>Your Smart Healthcare Assistant</p>
+    <button onclick="showPage('predictor')">Start Analysis</button>
+</div>
+
+<!-- PREDICTOR -->
+<div id="predictor" style="display:none;">
+    <div class="card">
+        <h2>Enter Health Data</h2>
+
+        <input id="symptoms" placeholder="Symptoms (fever, cough...)">
+        <input id="sugar" type="number" placeholder="Blood Sugar (mg/dL)">
+        <input id="bp" placeholder="Blood Pressure (120/80)">
+        <input id="chol" type="number" placeholder="Cholesterol">
+
+        <button onclick="analyze()">Analyze</button>
+
+        <div id="result" class="result"></div>
+    </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard" style="display:none;">
+    <div class="dashboard">
+
+        <h2>🌡️ Fever</h2>
+        <p>Symptoms: High temperature, fatigue, headache</p>
+        <p class="warning">Fever >3 days → Consult doctor</p>
+
+        <h2>❤️ Blood Pressure</h2>
+        <p>Normal: 120/80</p>
+
+        <h2>🍬 Blood Sugar</h2>
+        <p>Fasting: 70–99</p>
+
+        <h2>🩺 Cholesterol</h2>
+        <p>Total: &lt;200</p>
+
+    </div>
+</div>
+
+<!-- MEDICAL GUIDE -->
+<div id="medical" style="display:none;">
+    <div class="dashboard">
+
+        <h2>💊 Common Medicines</h2>
+
+        <p><b>Fever:</b> Paracetamol, Ibuprofen</p>
+        <p><b>Cold:</b> Cetirizine, Loratadine</p>
+        <p><b>Cough:</b> Dextromethorphan</p>
+        <p><b>BP:</b> Amlodipine</p>
+        <p><b>Diabetes:</b> Metformin</p>
+
+        <h2>📊 Normal Values</h2>
+        <table>
+            <tr><th>Test</th><th>Normal</th></tr>
+            <tr><td>BP</td><td>120/80</td></tr>
+            <tr><td>Sugar</td><td>70–99</td></tr>
+            <tr><td>Cholesterol</td><td>&lt;200</td></tr>
+        </table>
+
+    </div>
+</div>
+
+</div>
+
+<script>
+function showPage(page) {
+    let pages = ["home","predictor","dashboard","medical"];
+    pages.forEach(p => document.getElementById(p).style.display = "none");
+    document.getElementById(page).style.display = "block";
+}
+
+function analyze() {
+    let s = document.getElementById("symptoms").value.toLowerCase();
+    let sugar = parseInt(document.getElementById("sugar").value);
+    let bp = document.getElementById("bp").value;
+    let chol = parseInt(document.getElementById("chol").value);
+
+    let result = "";
+
+    if (sugar > 140) result += "⚠️ High Blood Sugar (Diabetes Risk)<br>";
+    if (sugar > 200) result += "🚨 Severe Diabetes Level<br>";
+
+    if (bp.includes("/")) {
+        let systolic = parseInt(bp.split("/")[0]);
+        if (systolic > 140) result += "⚠️ High Blood Pressure<br>";
+    }
+
+    if (chol > 200) result += "⚠️ High Cholesterol<br>";
+
+    if (s.includes("fever")) result += "⚠️ Possible Infection<br>";
+    if (s.includes("cough")) result += "⚠️ Respiratory Issue<br>";
+
+    if (result === "") result = "<span class='success'>✅ You are Healthy</span>";
+
+    document.getElementById("result").innerHTML = result;
+}
+</script>
+
+</body>
+</html>
